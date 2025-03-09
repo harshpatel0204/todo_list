@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <h1 class="text-center">Task List</h1>
+
+        <div class="d-flex justify-content-between my-3">
+            <a href="{% url 'task_create' %}" class="btn btn-success">➕ Add New Task</a>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Total Time</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.date }}</td>
+                    <td>{{ task.start_time }}</td>
+                    <td>{{ task.end_time }}</td>
+                    <td>{{ task.total_time }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>
+                        <a href="{% url 'task_update' task.id %}" class="btn btn-warning btn-sm">✏ Edit</a>
+                        <a href="{% url 'task_delete' task.id %}" class="btn btn-danger btn-sm">🗑 Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No tasks found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
