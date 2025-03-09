@@ -28,7 +28,9 @@ SECRET_KEY = "django-insecure-^%ekf6iud(7mc=4%knmn^jt2*k)w2q70t3&4$3u7b9hjx-j)ct
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "todo-list-ez85.onrender.com",
+]
 
 
 # Application definition
@@ -88,14 +90,14 @@ WSGI_APPLICATION = "todo_list.wsgi.application"
 #     }
 # }
 
+
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.getenv("DATABASE_URL", "postgresql://postgres:admin@db:5432/testing")
-        # default=os.getenv(
-        #     "DATABASE_URL", "postgresql://postgres:admin@localhost:5432/testing"
-        # )
+        default=os.getenv("DATABASE_URL"),  # Load from environment variable
+        conn_max_age=600,
     )
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
