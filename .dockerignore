@@ -1,0 +1,9 @@
+venv/
+.venv/
+.conda/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+.env
