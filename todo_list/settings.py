@@ -28,9 +28,7 @@ SECRET_KEY = "django-insecure-^%ekf6iud(7mc=4%knmn^jt2*k)w2q70t3&4$3u7b9hjx-j)ct
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "todo-list-ez85.onrender.com",
-]
+ALLOWED_HOSTS = ["todo-list-ez85.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -82,7 +80,7 @@ WSGI_APPLICATION = "todo_list.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "testing",
+        "NAME": "todo_list",
         "USER": "postgres",
         "PASSWORD": "admin",
         "HOST": "localhost",
