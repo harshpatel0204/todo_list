@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "3vEmhdDSn5bSBwU81qJWd2yb1tWWPmGi",
+    "192.168.204.187",
 ]
 
 
