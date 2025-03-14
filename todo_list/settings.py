@@ -79,28 +79,32 @@ TEMPLATES = [
 WSGI_APPLICATION = "todo_list.wsgi.application"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "RENDER" not in os.environ
+# DEBUG = "RENDER" not in os.environ
 
-# Database configuration
-if DEBUG:
-    # Local development database
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "todo_list",
-            "USER": "postgres",
-            "PASSWORD": "admin",
-            "HOST": "localhost",
-            "PORT": "5432",
-        }
-    }
-else:
-    # Production database (on Render)
-    DATABASES = {
-        "default": dj_database_url.config(
-            default=os.environ.get("DATABASE_URL"), conn_max_age=600, ssl_require=True
-        )
-    }
+# # Database configuration
+# if DEBUG:
+#     # Local development database
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql",
+#             "NAME": "todo_list",
+#             "USER": "postgres",
+#             "PASSWORD": "admin",
+#             "HOST": "localhost",
+#             "PORT": "5432",
+#         }
+#     }
+# else:
+#     # Production database (on Render)
+#     DATABASES = {
+#         "default": dj_database_url.config(
+#             default=os.environ.get("DATABASE_URL"), conn_max_age=600, ssl_require=True
+#         )
+#     }
+
+DATABASE_URL = os.getenv("DATABASE_URL", "postgres://postgres:admin@db:5432/testing")
+
+DATABASES = {"default": dj_database_url.config(default=DATABASE_URL)}
 
 
 # Database
@@ -160,6 +164,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATIC_URL = "static/"
 
