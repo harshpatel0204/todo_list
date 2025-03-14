@@ -28,7 +28,12 @@ SECRET_KEY = "django-insecure-^%ekf6iud(7mc=4%knmn^jt2*k)w2q70t3&4$3u7b9hjx-j)ct
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["todo-list-ez85.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "todo-list-ez85.onrender.com",
+    "localhost",
+    "127.0.0.1",
+    "3vEmhdDSn5bSBwU81qJWd2yb1tWWPmGi",
+]
 
 
 # Application definition
@@ -73,6 +78,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "todo_list.wsgi.application"
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = "RENDER" not in os.environ
+
+# Database configuration
+if DEBUG:
+    # Local development database
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "todo_list",
+            "USER": "postgres",
+            "PASSWORD": "admin",
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+    }
+else:
+    # Production database (on Render)
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=os.environ.get("DATABASE_URL"), conn_max_age=600, ssl_require=True
+        )
+    }
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -89,7 +118,13 @@ WSGI_APPLICATION = "todo_list.wsgi.application"
 # }
 
 
-DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default=os.getenv("DATABASE_URL"),
+#         conn_max_age=600,  # Helps with persistent connections
+#         ssl_require=True,  # Ensures SSL connection
+#     )
+# }
 
 
 # Password validation
