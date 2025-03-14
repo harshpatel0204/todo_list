@@ -102,7 +102,9 @@ WSGI_APPLICATION = "todo_list.wsgi.application"
 #         )
 #     }
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgres://postgres:admin@db:5432/testing")
+DATABASE_URL = os.getenv(
+    "DATABASE_URL", "postgres://postgres:admin@host.docker.internal:5432/todo_list"
+)
 
 DATABASES = {"default": dj_database_url.config(default=DATABASE_URL)}
 

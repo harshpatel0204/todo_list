@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://postgres:admin@db:5432/todo_list
+      DATABASE_URL: postgresql://postgres:admin@host.docker.internal:5432/todo_list
     ports:
       - "8000:8000"
     command: >
