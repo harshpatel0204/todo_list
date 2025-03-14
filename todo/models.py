@@ -12,7 +12,7 @@ class TaskManager(models.Manager):
 
 
 class Task(models.Model):
-    date = models.DateField(default=now)
+    date = models.DateField(default=datetime.today)
     start_time = models.TimeField()
     end_time = models.TimeField()
     description = models.TextField()
@@ -22,6 +22,9 @@ class Task(models.Model):
     )  # Remove default=now
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = "tasks"
 
     objects = TaskManager()
     all_objects = models.Manager()
@@ -33,7 +36,7 @@ class Task(models.Model):
         return (end - start) if end > start else timedelta()
 
     def soft_delete(self):
-        self.deleted_at = datetime.now()
+        self.deleted_at = now()
         self.save()
 
     def restore(self):
